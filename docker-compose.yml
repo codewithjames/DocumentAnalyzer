@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./DocumentAnalyzerProject
+      dockerfile: Django-Dockerfile.yml
+    environment:
+      SECRET_KEY: "make-a-new-secret-key"
+      LOG_FILE: "/log_dir/django.log"
+    command: bash -c "python /djangoapp/manage.py makemigrations && python /djangoapp/manage.py migrate --noinput && gunicorn --workers=3  DocumentAnalyzerProject.wsgi -b 0.0.0.0:8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./DocumentAnalyzerProject/:/djangoapp
+      - ./logs/:/log_dir
+  nginx:
+    build:
+      context: ./DocumentAnalyzerProject
+      dockerfile: Nginx-Dockerfile.yml
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs/:/log_dir
+    depends_on:
+      - web
