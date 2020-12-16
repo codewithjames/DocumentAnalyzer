@@ -1,4 +1,4 @@
-#####Overview of features:
+##### Overview of features:
 
 - Docker & Docker-Compose - Environment variables, logging, etc.
 - Django
@@ -24,6 +24,6 @@
 - If you go to say http://127.0.0.1:8000 the url in DRF API Root won't include the port (8000)
 
 
-###Interaction
+### Interaction
 
 To upload a file, post it to http://127.0.0.1:8000/upload/ and the response will include the metrics. For all metrics you can go to http://127.0.0.1:8000/metrics/ for a list or to a specific metric at http://127.0.0.1:8000/metrics/1/
